@@ -1,0 +1,1 @@
+# mcp-opsmate test suite

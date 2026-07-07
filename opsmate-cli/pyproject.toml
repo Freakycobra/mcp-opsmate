@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "opsmate-cli"
+version = "0.1.0"
+description = "Rich-based terminal UI for mcp-opsmate infrastructure automation"
+authors = ["mcp-opsmate Team <team@opsmate.dev>"]
+readme = "README.md"
+packages = [{include = "opsmate_cli"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+typer = {extras = ["all"], version = "^0.12.0"}
+rich = "^13.7.0"
+httpx = {extras = ["http2"], version = "^0.27.0"}
+httpx-sse = "^0.4.0"
+pydantic = "^2.7.0"
+python-dotenv = "^1.0.0"
+pydantic-settings = "^2.2.0"
+pyyaml = "^6.0.1"
+prompt-toolkit = "^3.0.43"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.0"
+respx = "^0.21.0"
+pytest-cov = "^5.0.0"
+ruff = "^0.4.0"
+mypy = "^1.10.0"
+types-pyyaml = "^6.0.12"
+
+[tool.poetry.scripts]
+opsmate = "opsmate_cli.main:app"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-opsmate-50 text-opsmate-900;
+    overflow: hidden;
+  }
+
+  * {
+    @apply scrollbar-thin;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+
+@layer components {
+  /* Scrollbar styling */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: theme('colors.opsmate.300');
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: theme('colors.opsmate.400');
+  }
+
+  /* Code block styling */
+  .code-block {
+    @apply relative rounded-lg bg-opsmate-900 text-opsmate-100 p-4 overflow-x-auto text-sm leading-relaxed;
+  }
+
+  .code-block .copy-button {
+    @apply absolute top-2 right-2 opacity-0 transition-opacity;
+  }
+
+  .code-block:hover .copy-button {
+    @apply opacity-100;
+  }
+
+  /* Inline code */
+  .inline-code {
+    @apply px-1.5 py-0.5 rounded bg-opsmate-200 text-opsmate-800 text-xs font-mono;
+  }
+
+  /* Status badge base */
+  .status-badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium border;
+  }
+
+  /* Mode badge */
+  .mode-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border transition-all cursor-pointer;
+  }
+
+  /* Card styles */
+  .opsmate-card {
+    @apply bg-white rounded-xl border border-opsmate-200 shadow-card;
+  }
+
+  /* ReactFlow custom styling */
+  .react-flow__node {
+    @apply transition-shadow duration-200;
+  }
+
+  .react-flow__node.selected {
+    @apply shadow-elevated;
+  }
+
+  .react-flow__edge-path {
+    stroke-width: 2;
+  }
+
+  .react-flow__controls {
+    @apply opsmate-card shadow-elevated !important;
+  }
+
+  .react-flow__controls-button {
+    @apply border-opsmate-200 text-opsmate-600 hover:bg-opsmate-50 !important;
+  }
+
+  .react-flow__minimap {
+    @apply opsmate-card !important;
+  }
+
+  .react-flow__attribution {
+    @apply hidden;
+  }
+
+  /* Animation utilities */
+  .animate-enter {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  /* Toast notification */
+  .toast-container {
+    @apply fixed top-4 right-4 z-50 flex flex-col gap-2;
+  }
+
+  .toast {
+    @apply flex items-start gap-3 px-4 py-3 rounded-xl shadow-elevated border max-w-sm animate-slide-up;
+  }
+
+  /* Chat message styles */
+  .message-user {
+    @apply ml-auto bg-opsmate-800 text-opsmate-50 rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] text-sm leading-relaxed;
+  }
+
+  .message-system {
+    @apply mr-auto bg-white border border-opsmate-200 text-opsmate-800 rounded-2xl rounded-bl-md px-4 py-3 max-w-[85%] text-sm leading-relaxed shadow-soft;
+  }
+
+  /* Markdown content */
+  .markdown-content h1 {
+    @apply text-lg font-semibold mb-2 mt-4;
+  }
+
+  .markdown-content h2 {
+    @apply text-base font-semibold mb-2 mt-3;
+  }
+
+  .markdown-content h3 {
+    @apply text-sm font-semibold mb-1 mt-2;
+  }
+
+  .markdown-content p {
+    @apply mb-2 leading-relaxed;
+  }
+
+  .markdown-content ul {
+    @apply list-disc list-inside mb-2 space-y-0.5;
+  }
+
+  .markdown-content ol {
+    @apply list-decimal list-inside mb-2 space-y-0.5;
+  }
+
+  .markdown-content pre {
+    @apply code-block my-2;
+  }
+
+  .markdown-content code {
+    @apply inline-code;
+  }
+
+  .markdown-content pre code {
+    @apply p-0 bg-transparent text-inherit;
+  }
+
+  .markdown-content blockquote {
+    @apply border-l-2 border-opsmate-300 pl-3 italic text-opsmate-600 my-2;
+  }
+
+  .markdown-content hr {
+    @apply border-opsmate-200 my-4;
+  }
+
+  .markdown-content table {
+    @apply w-full text-xs my-2 border-collapse;
+  }
+
+  .markdown-content th {
+    @apply text-left px-2 py-1.5 bg-opsmate-100 font-medium border-b border-opsmate-300;
+  }
+
+  .markdown-content td {
+    @apply px-2 py-1.5 border-b border-opsmate-100;
+  }
+
+  /* Plan DAG step node */
+  .step-node {
+    @apply rounded-lg border-2 px-3 py-2 min-w-[140px] max-w-[200px] text-xs transition-all duration-300;
+  }
+
+  .step-node-pending {
+    @apply bg-opsmate-50 border-opsmate-300 text-opsmate-600;
+  }
+
+  .step-node-running {
+    @apply bg-blue-50 border-blue-400 text-blue-700 shadow-md;
+  }
+
+  .step-node-completed {
+    @apply bg-green-50 border-green-400 text-green-700;
+  }
+
+  .step-node-failed {
+    @apply bg-red-50 border-red-400 text-red-700;
+  }
+
+  .step-node-skipped {
+    @apply bg-gray-50 border-gray-300 text-gray-400 opacity-60;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

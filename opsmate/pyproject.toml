@@ -1,0 +1,89 @@
+[tool.poetry]
+name = "opsmate"
+version = "1.0.0"
+description = "Infrastructure Automation MCP Terminal -- FastAPI backend"
+authors = ["Jashwanth Nag Veepuri <jashwanth@example.com>"]
+readme = "README.md"
+packages = [{ include = "opsmate" }]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+
+# Web framework & server
+fastapi = "^0.115.0"
+uvicorn = { version = "^0.34.0", extras = ["standard"] }
+python-multipart = "^0.0.20"
+
+# Validation & configuration
+pydantic = "^2.10.0"
+pydantic-settings = "^2.7.0"
+email-validator = "^2.2.0"
+
+# Database
+sqlalchemy = { version = "^2.0.36", extras = ["asyncio"] }
+asyncpg = "^0.30.0"
+alembic = "^1.14.0"
+
+# Cache & circuit breaker
+redis = "^5.2.0"
+
+# HTTP client
+httpx = { version = "^0.28.0", extras = ["http2"] }
+httpx-sse = "^0.4.0"
+
+# LLM integration
+openai = "^1.58.0"
+
+# MCP protocol
+mcp = "^1.6.0"
+
+# Observability
+prometheus-client = "^0.21.0"
+structlog = "^24.4.0"
+
+# Async utilities
+anyio = "^4.7.0"
+
+# Data generation (mock mode)
+faker = "^33.0.0"
+
+# Date/time
+python-dateutil = "^2.9.0"
+
+# YAML config
+pyyaml = "^6.0.2"
+
+# Security
+python-jose = { version = "^3.3.0", extras = ["cryptography"] }
+bcrypt = "^4.2.0"
+
+# CLI framework
+typer = "^0.15.0"
+
+# Terminal UI
+rich = "^13.9.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
+pytest-asyncio = "^0.25.0"
+pytest-cov = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.coverage.run]
+source = ["opsmate"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+]
