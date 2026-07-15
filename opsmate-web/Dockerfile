@@ -12,8 +12,8 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Install dependencies (from opsmate-web/)
-COPY opsmate-web/package.json opsmate-web/package-lock.json* ./
-RUN npm ci --silent
+COPY opsmate-web/package.json ./
+RUN npm install --silent
 
 # Copy source from opsmate-web/ and build
 COPY opsmate-web/ .
