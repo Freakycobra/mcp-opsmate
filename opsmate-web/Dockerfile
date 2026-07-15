@@ -17,7 +17,7 @@ RUN npm install --silent
 
 # Copy source from opsmate-web/ and build
 COPY opsmate-web/ .
-RUN npm run build
+RUN npx vite build
 
 # ------------------------------------------------------------------------------
 # Stage 2: Production (nginx)
