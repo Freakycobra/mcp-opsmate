@@ -1,6 +1,7 @@
 # =============================================================================
 # mcp-opsmate Web — Multi-stage Dockerfile
 # React 18 + Vite → Nginx
+# Build context: project root (.)
 # =============================================================================
 
 # ------------------------------------------------------------------------------
@@ -10,12 +11,12 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies
-COPY package.json package-lock.json* ./
+# Install dependencies (from opsmate-web/)
+COPY opsmate-web/package.json opsmate-web/package-lock.json* ./
 RUN npm ci --silent
 
-# Copy source and build
-COPY . .
+# Copy source from opsmate-web/ and build
+COPY opsmate-web/ .
 RUN npm run build
 
 # ------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ FROM nginx:alpine AS runtime
 # Remove default nginx config
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy custom nginx config
+# Copy custom nginx config (from project root)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy built React app from builder stage

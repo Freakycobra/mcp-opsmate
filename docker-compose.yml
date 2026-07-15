@@ -142,8 +142,8 @@ services:
   # ---------------------------------------------------------------------------
   web:
     build:
-      context: ./opsmate-web
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./opsmate-web/Dockerfile
     container_name: opsmate-web
     restart: unless-stopped
     depends_on:
